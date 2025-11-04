@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+@import 'tailwindcss';
+
+/* --- PIXEL ART STYLES --- */
+
+.font-pixel-title {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-pixel-body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.pixel-asset {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges; 
+  image-rendering: crisp-edges;     
+}
+
+.pixel-border-box {
+  position: relative;
+  border: none;
+  border-radius: 0;
+  background-color: transparent; 
+  transition: all 0.1s ease-in-out;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  /* --- Variabel CSS untuk Kustomisasi --- */
+  /* Warna Default (Non-Hover) */
+  --pixel-border-color: #475569;
+  --pixel-bg-color: #020617;
+  /* Warna Default (Hover) */
+  --pixel-border-hover-color: #64748b;
+  --pixel-bg-hover-color: #0F172A;
+}
+
+/* Lapisan border luar */
+.pixel-border-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--pixel-border-color); /* Menggunakan Variabel */
+  clip-path: polygon(
+    /* ... (kode clip-path Anda tetap sama) ... */
+    6px 0px, 6px 2px, 4px 2px, 4px 4px, 2px 4px, 2px 6px, 0px 6px, 0px 8px,
+    0px calc(100% - 6px), 2px calc(100% - 6px), 2px calc(100% - 4px),
+    4px calc(100% - 4px), 4px calc(100% - 2px), 6px calc(100% - 2px),
+    6px calc(100% + 0px), 8px calc(100% + 0px),
+    calc(100% - 6px) calc(100% + 0px),
+    calc(100% - 6px) calc(100% - 2px),
+    calc(100% - 4px) calc(100% - 2px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 2px) calc(100% - 4px),
+    calc(100% - 2px) calc(100% - 6px),
+    calc(100% + 0px) calc(100% - 6px),
+    calc(100% + 0px) calc(100% - 8px),
+    calc(100% + 0px) 6px, calc(100% - 2px) 6px, calc(100% - 2px) 4px,
+    calc(100% - 4px) 4px, calc(100% - 4px) 2px, calc(100% - 6px) 2px,
+    calc(100% - 6px) 0px, calc(100% - 8px) 0px
+  );
+  /* FIX Z-INDEX: Kirim border ke belakang konten */
+  z-index: -2; 
+}
+
+/* Lapisan isi dalam */
+.pixel-border-box::after {
+  content: "";
+  position: absolute;
+  inset: 3px; 
+  background-color: var(--pixel-bg-color); /* Menggunakan Variabel */
+  clip-path: polygon(
+    /* ... (kode clip-path yang sama persis seperti ::before) ... */
+    6px 0px, 6px 2px, 4px 2px, 4px 4px, 2px 4px, 2px 6px, 0px 6px, 0px 8px,
+    0px calc(100% - 6px), 2px calc(100% - 6px), 2px calc(100% - 4px),
+    4px calc(100% - 4px), 4px calc(100% - 2px), 6px calc(100% - 2px),
+    6px calc(100% + 0px), 8px calc(100% + 0px),
+    calc(100% - 6px) calc(100% + 0px),
+    calc(100% - 6px) calc(100% - 2px),
+    calc(100% - 4px) calc(100% - 2px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 2px) calc(100% - 4px),
+    calc(100% - 2px) calc(100% - 6px),
+    calc(100% + 0px) calc(100% - 6px),
+    calc(100% + 0px) calc(100% - 8px),
+    calc(100% + 0px) 6px, calc(100% - 2px) 6px, calc(100% - 2px) 4px,
+    calc(100% - 4px) 4px, calc(100% - 4px) 2px, calc(100% - 6px) 2px,
+    calc(100% - 6px) 0px, calc(100% - 8px) 0px
+  );
+  /* FIX Z-INDEX: Kirim background ke belakang konten */
+  z-index: -1;
+}
+
+/* --- KUSTOMISASI HOVER (LOGIKA DIBALIK) --- */
+
+/* ✅ DEFAULT: TIDAK ADA HOVER */
+.pixel-border-box:hover::before {
+  background-color: var(--pixel-border-color); /* Tetap di warna default */
+}
+.pixel-border-box:hover::after {
+  background-color: var(--pixel-bg-color); /* Tetap di warna default */
+}
+
+/* ✅ NEW: Kelas Utility untuk MENGAKTIFKAN Hover Default */
+.pixel-border-hover:hover::before {
+  background-color: var(--pixel-border-hover-color);
+}
+.pixel-border-hover:hover::after {
+  background-color: var(--pixel-bg-hover-color);
+}
+
+/* ✅ NEW: Kelas Utility untuk HOVER KUSTOM (Contoh Cyan) */
+.pixel-hover-cyan:hover::before {
+  background-color: #06b6d4; /* Cyan Terang */
+}
+.pixel-hover-cyan:hover::after {
+  background-color: #0e7490; /* Cyan Gelap */
+}
+
+/* --- ANIMASI PIXEL --- */
+@keyframes float-slow {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12px, 8px); 
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 15s ease-in-out infinite;
+}
+
+/* ... kode lainnya tetap sama ... */
+@keyframes gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+.stars,
+.stars2,
+.stars3 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat;
+  background-size: contain;
+  animation: moveStars 200s linear infinite;
+}
+
+.stars {
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+}
+.stars2 {
+  background-image: url('https://www.transparenttextures.com/patterns/tiny-checkers.png');
+  animation-duration: 400s;
+}
+.stars3 {
+  background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+  animation-duration: 600s;
+}
+
+@keyframes moveStars {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+.animate-gradientMove {
+  animation: gradientMove 8s linear infinite;
+  will-change: background-position;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+html {
+  scroll-behavior: smooth;
+}
