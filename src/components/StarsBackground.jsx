@@ -1,3 +1,5 @@
+// src/components/StarsBackground.jsx
+
 import { useEffect, useRef } from 'react'
 
 export default function StarsBackground() {
@@ -85,7 +87,7 @@ export default function StarsBackground() {
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, []) // Dependensi dikembalikan menjadi kosong
 
   return (
     <canvas

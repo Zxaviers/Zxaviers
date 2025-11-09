@@ -12,13 +12,13 @@ export default function Projects({ projects, id }) {
     // ✅ MODIFIED: Padding disesuaikan agar pas di dalam Mega Container
     <motion.section
       id={id}
-      className="relative px-0 py-12 text-center scroll-mt-24" 
+      className="relative px-0 py-12 overflow-hidden text-center scroll-mt-24" 
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: false, amount: 0.3 }}
     >
-      <h3 className="mb-8 text-2xl font-semibold font-pixel-title">Projects</h3>
+      <h3 className="mb-8 text-2xl font-semibold font-pixel-title">Discovered Artifacts</h3>
       <div className="grid gap-8 md:grid-cols-3">
         {projects.map((p, i) => (
           // Kartu individu tetap memiliki border
@@ -49,7 +49,7 @@ export default function Projects({ projects, id }) {
                   {p.techStack.map((tech) => (
                     <span 
                       key={tech} 
-                      className="px-2 py-1 text-xs font-medium text-cyan-200 bg-cyan-700/50 rounded-sm font-pixel-body"
+                      className="px-2 py-1 text-xs font-medium rounded-sm text-cyan-200 bg-cyan-700/50 font-pixel-body"
                     >
                       {tech}
                     </span>

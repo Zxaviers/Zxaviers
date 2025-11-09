@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pixi/particle-emitter": "^5.0.8",
+    "@pixi/react": "^8.0.3",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
     "@types/three": "^0.180.0",
     "framer-motion": "^12.23.22",
+    "kaboom": "^3000.1.17",
+    "pixi.js": "^8.14.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",

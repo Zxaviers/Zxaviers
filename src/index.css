@@ -2,6 +2,42 @@
 
 @import 'tailwindcss';
 
+
+html {
+  scrollbar-color: #22d3ee #0F172A;
+  scrollbar-width: thin;
+
+  /* ✅ Hapus cursor default dari sini */
+  /* cursor: url('/cursor.png'), auto; */
+}
+
+/* ✅ Terapkan kursor custom HANYA pada perangkat non-sentuh (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    cursor: url('/cursor.png'), auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #0F172A;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #22d3ee;
+  border: 2px solid #0F172A;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #67e8f9;
+}
+
+a, button, [role="button"], input[type="submit"], .cursor-pointer {
+  cursor: pointer;
+}
+
+
+
 /* --- PIXEL ART STYLES --- */
 
 .font-pixel-title {
@@ -9,8 +45,11 @@
 }
 
 .font-pixel-body {
-  font-family: 'Roboto', sans-serif;
+  /* ✅ REVISI FONT */
+  font-family: 'VT323', monospace;
+  letter-spacing: 0.5px;
 }
+
 
 .pixel-asset {
   image-rendering: pixelated;
@@ -28,10 +67,8 @@
   -webkit-backdrop-filter: none !important;
 
   /* --- Variabel CSS untuk Kustomisasi --- */
-  /* Warna Default (Non-Hover) */
   --pixel-border-color: #475569;
   --pixel-bg-color: #020617;
-  /* Warna Default (Hover) */
   --pixel-border-hover-color: #64748b;
   --pixel-bg-hover-color: #0F172A;
 }
@@ -41,9 +78,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-color: var(--pixel-border-color); /* Menggunakan Variabel */
+  background-color: var(--pixel-border-color);
   clip-path: polygon(
-    /* ... (kode clip-path Anda tetap sama) ... */
     6px 0px, 6px 2px, 4px 2px, 4px 4px, 2px 4px, 2px 6px, 0px 6px, 0px 8px,
     0px calc(100% - 6px), 2px calc(100% - 6px), 2px calc(100% - 4px),
     4px calc(100% - 4px), 4px calc(100% - 2px), 6px calc(100% - 2px),
@@ -60,7 +96,6 @@
     calc(100% - 4px) 4px, calc(100% - 4px) 2px, calc(100% - 6px) 2px,
     calc(100% - 6px) 0px, calc(100% - 8px) 0px
   );
-  /* FIX Z-INDEX: Kirim border ke belakang konten */
   z-index: -2; 
 }
 
@@ -69,9 +104,8 @@
   content: "";
   position: absolute;
   inset: 3px; 
-  background-color: var(--pixel-bg-color); /* Menggunakan Variabel */
+  background-color: var(--pixel-bg-color);
   clip-path: polygon(
-    /* ... (kode clip-path yang sama persis seperti ::before) ... */
     6px 0px, 6px 2px, 4px 2px, 4px 4px, 2px 4px, 2px 6px, 0px 6px, 0px 8px,
     0px calc(100% - 6px), 2px calc(100% - 6px), 2px calc(100% - 4px),
     4px calc(100% - 4px), 4px calc(100% - 2px), 6px calc(100% - 2px),
@@ -88,35 +122,222 @@
     calc(100% - 4px) 4px, calc(100% - 4px) 2px, calc(100% - 6px) 2px,
     calc(100% - 6px) 0px, calc(100% - 8px) 0px
   );
-  /* FIX Z-INDEX: Kirim background ke belakang konten */
   z-index: -1;
 }
 
 /* --- KUSTOMISASI HOVER (LOGIKA DIBALIK) --- */
-
-/* ✅ DEFAULT: TIDAK ADA HOVER */
 .pixel-border-box:hover::before {
-  background-color: var(--pixel-border-color); /* Tetap di warna default */
+  background-color: var(--pixel-border-color);
 }
 .pixel-border-box:hover::after {
-  background-color: var(--pixel-bg-color); /* Tetap di warna default */
+  background-color: var(--pixel-bg-color);
 }
-
-/* ✅ NEW: Kelas Utility untuk MENGAKTIFKAN Hover Default */
 .pixel-border-hover:hover::before {
   background-color: var(--pixel-border-hover-color);
 }
 .pixel-border-hover:hover::after {
   background-color: var(--pixel-bg-hover-color);
 }
-
-/* ✅ NEW: Kelas Utility untuk HOVER KUSTOM (Contoh Cyan) */
 .pixel-hover-cyan:hover::before {
-  background-color: #06b6d4; /* Cyan Terang */
+  background-color: #06b6d4;
 }
 .pixel-hover-cyan:hover::after {
-  background-color: #0e7490; /* Cyan Gelap */
+  background-color: #0e7490;
 }
+
+
+
+.pixel-input {
+  background-color: #0F172A; 
+  border: 2px solid #475569; 
+  color: white;
+  /* ✅ REVISI FONT */
+  font-family: 'VT323', monospace; 
+  font-size: 1.125rem; /* ✅ Sesuaikan dengan font-pixel-body */
+  width: 100%;
+  transition: all 0.2s;
+  padding: 0.5rem; /* Tambahkan padding agar lebih baik */
+}
+@media (min-width: 768px) {
+  .pixel-input {
+    font-size: 1.25rem;
+  }
+}
+.pixel-input:focus {
+  outline: none;
+  border-color: #22d3ee; 
+}
+.pixel-input::placeholder {
+  color: #64748b; 
+}
+
+
+/* --- Tooltip Sederhana untuk Skills --- */
+.skill-item {
+  position: relative; /* Diperlukan agar tooltip terposisi */
+}
+
+.skill-tooltip {
+  position: absolute;
+  bottom: 120%; /* Posisikan di atas skill bar */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0F172A;
+  color: #22d3ee;
+  padding: 6px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  border: 2px solid #22d3ee;
+  z-index: 10;
+  
+  /* Sembunyikan default */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  white-space: nowrap; /* Agar tidak terpotong */
+}
+
+/* Tampilkan saat hover */
+.skill-item:hover .skill-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ✅ --- CSS BARU UNTUK SKILL TREE (RESPONSIF) --- */
+.skill-tree-grid {
+  display: grid;
+  grid-template-rows: repeat(4, 60px);    /* ✅ 4 baris, @ 60px (mobile) */
+  grid-template-columns: repeat(4, 1fr); /* 4 kolom */
+  gap: 1rem; /* ✅ Jarak antar node (mobile) */
+  position: relative; 
+  padding: 0.5rem; /* ✅ Padding (mobile) */
+  border: 2px solid var(--pixel-border-color);
+  background-color: var(--pixel-bg-color);
+  min-height: 300px; /* ✅ Tinggi minimal (mobile) */
+}
+
+.skill-node {
+  /* Menempatkan node di grid */
+  grid-row: var(--row);
+  grid-column: var(--col);
+
+  /* Tampilan */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* ✅ Ukuran ikon (mobile) */
+  transition: all 0.2s;
+  background-color: transparent;
+  width: 45px; /* ✅ Ukuran node (mobile) */
+  height: 45px; /* ✅ Ukuran node (mobile) */
+  margin: auto; /* Pusatkan di sel grid */
+  
+  /* Hilangkan style default button */
+  border: none;
+  padding: 0;
+  position: relative; /* Tambahkan ini */
+  z-index: 2;
+}
+
+/* ✅ Ukuran desktop untuk Skill Tree */
+@media (min-width: 768px) {
+  .skill-tree-grid {
+    grid-template-rows: repeat(4, 80px); /* Ukuran asli desktop */
+    gap: 1.5rem;
+    padding: 1rem;
+    min-height: 400px;
+  }
+  .skill-node {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+
+/* Warna node berdasarkan level (tidak berubah) */
+.skill-node[data-level="Proficient"] {
+  --pixel-border-color: #22d3ee; /* Cyan */
+  --pixel-bg-color: #155e75;
+}
+.skill-node[data-level="Familiar"] {
+  --pixel-border-color: #a3e635; /* Lime */
+  --pixel-bg-color: #3f6212;
+}
+.skill-node[data-level="Basic"] {
+  --pixel-border-color: #64748b; /* Slate */
+  --pixel-bg-color: #1e293b;
+}
+
+/* Style untuk node yang aktif/dipilih (tidak berubah) */
+.skill-node.selected {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px 5px var(--pixel-border-color);
+  --pixel-bg-hover-color: var(--pixel-bg-color); /* Jaga warna bg saat hover */
+}
+
+/* Style untuk Tab Skill (tidak berubah) */
+.skill-tab {
+  border: none;
+  background-color: transparent;
+  padding: 0.75rem 1rem;
+  font-family: 'Press Start 2P', cursive;
+  color: #64748b; /* Abu-abu */
+  transition: all 0.2s;
+  font-size: 0.75rem; /* ✅ Perkecil font tab di mobile */
+}
+@media (min-width: 768px) {
+  .skill-tab {
+    font-size: 1rem; /* Ukuran asli di desktop */
+  }
+}
+.skill-tab:hover {
+  color: white;
+  background-color: #0F172A;
+}
+.skill-tab.active {
+  color: #22d3ee; /* Cyan */
+  background-color: #0F172A;
+  border-bottom: 2px solid #22d3ee;
+}
+
+/* ✅ Garis Skill Tree Responsif */
+.skill-line-h {
+  position: relative;
+  grid-column: var(--col-start) / var(--col-end);
+  grid-row: var(--row);
+  height: 4px; /* ✅ Garis lebih tipis (mobile) */
+  background-color: #475569;
+  align-self: center;
+  margin: 0 40px; /* ✅ Margin disesuaikan (mobile) */
+  z-index: 1;
+}
+
+.skill-line-v {
+  position: relative;
+  grid-column: var(--col);
+  grid-row: var(--row-start) / var(--row-end);
+  width: 4px; /* ✅ Garis lebih tipis (mobile) */
+  background-color: #475569;
+  justify-self: center;
+  margin: 22px 0; /* ✅ Margin disesuaikan (mobile) */
+  z-index: 1;
+}
+
+/* ✅ Ukuran garis desktop */
+@media (min-width: 768px) {
+  .skill-line-h {
+    height: 6px;
+    margin: 0 55px; /* Ukuran asli desktop */
+  }
+  .skill-line-v {
+    width: 6px;
+    margin: 30px 0; /* Ukuran asli desktop */
+  }
+}
+/* --- AKHIR CSS SKILL TREE --- */
+
 
 /* --- ANIMASI PIXEL --- */
 @keyframes float-slow {
@@ -131,11 +352,13 @@
   }
 }
 
-.animate-float-slow {
-  animation: float-slow 15s ease-in-out infinite;
+/* ✅ REVISI AKSESIBILITAS */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float-slow {
+    animation: float-slow 15s ease-in-out infinite;
+  }
 }
 
-/* ... kode lainnya tetap sama ... */
 @keyframes gradient {
   0%,
   100% {
@@ -200,4 +423,33 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ✅ KELAS BARU UNTUK ASET HERO */
+.hero-rocket-asset {
+  top: 15%;
+  left: 5%; /* Sedikit ke dalam di mobile */
+  width: 120px; /* Ukuran mobile */
+  height: 120px;
+  transform: rotate(10deg);
+}
+.hero-planet-asset {
+  bottom: 15%;
+  right: 5%; /* Sedikit ke dalam di mobile */
+  width: 100px; /* Ukuran mobile */
+  height: 100px;
+  transform: rotate(-10deg);
+}
+
+@media (min-width: 768px) {
+  .hero-rocket-asset {
+    left: 10%; /* Posisi desktop */
+    width: 200px; /* Ukuran desktop */
+    height: 200px;
+  }
+  .hero-planet-asset {
+    right: 10%; /* Posisi desktop */
+    width: 180px; /* Ukuran desktop */
+    height: 180px;
+  }
 }

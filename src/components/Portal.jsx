@@ -67,7 +67,7 @@ export default function ProjectModal({ selectedProject, onClose }) {
                 href={selectedProject.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors text-cyan-300 hover:text-blue-400 font-pixel-body" 
+                className="text-lg transition-colors text-cyan-300 hover:text-blue-400 font-pixel-body md:text-xl" 
               >
                 Open in New Tab →
               </a>

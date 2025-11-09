@@ -6,20 +6,7 @@ import { motion } from 'framer-motion'
 
 export default function Hero({ heroTypewriter, id, assets }) {
   const heroRef = useRef(null)
-
-  // ✅ NILAI MANUAL FINAL UNTUK ASET
-  // --- ROCKET ---
-  const ROCKET_POS_TOP = '30%';    
-  const ROCKET_POS_LEFT = '20%';   
-  const ROCKET_SIZE = '100px';      
-  const ROCKET_ROTATE = '10deg';   
-
-  // --- PLANET ---
-  const PLANET_POS_BOTTOM = '20%'; 
-  const PLANET_POS_RIGHT = '20%';  
-  const PLANET_SIZE = '150px';      
-  const PLANET_ROTATE = '-10deg';  
-
+  
   return (
     <section
       ref={heroRef}
@@ -27,49 +14,36 @@ export default function Hero({ heroTypewriter, id, assets }) {
       className="relative flex flex-col items-center justify-center h-screen overflow-hidden text-center scroll-mt-24"
     >
       
-      {/* 🚀 Rocket (Kiri Atas) */}
+      {/* ... (Aset roket & planet tidak berubah) ... */}
       {assets.rocket && (
         <div 
           alt="Pixel Rocket" 
-          className="absolute z-[2] pixel-asset" 
+          className="absolute z-2 pixel-asset animate-float-slow hero-rocket-asset" 
           style={{ 
             backgroundImage: `url(${assets.rocket})`,
-            backgroundSize: '100% 100%',
-            top: ROCKET_POS_TOP, 
-            left: ROCKET_POS_LEFT,
-            width: ROCKET_SIZE, 
-            height: ROCKET_SIZE, 
-            transform: `rotate(${ROCKET_ROTATE})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
           }} 
         />
       )}
-      
-      {/* 🪐 Planet Kecil (Kanan Bawah, Floating Slow) */}
       {assets.planet && (
         <div 
-          className="absolute z-[2] animate-float-slow" 
-          style={{ 
-              bottom: PLANET_POS_BOTTOM,
-              right: PLANET_POS_RIGHT,
-          }}
+          className="absolute z-2 animate-float-slow hero-planet-asset" 
         >
             <div
                 alt="Pixel Planet" 
-                className="pixel-asset" 
+                className="w-full h-full pixel-asset" 
                 style={{ 
                     backgroundImage: `url(${assets.planet})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
-                    width: PLANET_SIZE,
-                    height: PLANET_SIZE,
-                    transform: `rotate(${PLANET_ROTATE})`,
                 }} 
             />
         </div>
       )}
 
       {/* Lapisan 3: Overlay gradient agar teks tetap kontras */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/90 z-[1]" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/20 to-black/90 z-1" />
 
       {/* Konten teks (Lapisan 4) */}
       <div className="relative z-10">
@@ -92,7 +66,11 @@ export default function Hero({ heroTypewriter, id, assets }) {
           Hello, I'm Zxa
         </motion.h1>
 
-        <h2 className="text-2xl font-medium text-gray-300 md:text-3xl font-pixel-body">
+        {/* ✅ PERUBAHAN UKURAN FONT (Sekarang berfungsi)
+          'text-3xl md:text-4xl' 
+          Kelas 'font-pixel-body' di sini sekarang hanya mengatur font-family.
+        */}
+        <h2 className="text-3xl font-medium text-gray-300 md:text-4xl font-pixel-body">
           {heroTypewriter}
         </h2>
       </div>

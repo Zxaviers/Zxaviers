@@ -1,26 +1,72 @@
 // src/Sections/Experience.jsx
+// eslint-disable-next-line no-unused-vars
+import { motion, useSpring, useTransform, useInView } from 'framer-motion'
+import { useEffect, useRef } from 'react' // Import useRef dan useEffect
 
-//eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion'
+// ✅ KOMPONEN "DUMB" UNTUK ANGKA (Logika sudah benar)
+function AnimatedNumber({ motionValue }) {
+  const rounded = useTransform(motionValue, (latest) => Math.round(latest));
+  return <motion.span>{rounded}</motion.span>;
+}
 
-// --- KOMPONEN KARTU STATS (Sidebar Kanan) ---
-const StatsCard = ({ roles }) => (
-    <div className="relative p-4 bg-black/50 border pixel-border-box pixel-border-hover hover:scale-105 ">
-        <h3 className="text-lg font-semibold text-cyan-400 font-pixel-title text-center mb-4">
-            CAREER STATS
+// ✅ KOMPONEN "PINTAR" STAT ITEM (Logika sudah benar)
+const StatItem = ({ label, value, valueColor = 'text-white', isAnimated = false }) => {
+  const ref = useRef(null); 
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const motionValue = useSpring(0, {
+    damping: 100,
+    stiffness: 100,
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value); 
+    }
+  }, [isInView, value, motionValue]);
+
+  return (
+    <li ref={ref} className="flex items-center justify-between text-lg text-gray-300 md:text-xl font-pixel-body">
+      <span className="text-gray-400">{label}:</span>
+      <span className={`${valueColor} font-pixel-title text-sm`}>
+        {isAnimated ? <AnimatedNumber motionValue={motionValue} /> : value}
+      </span>
+    </li>
+  );
+}
+
+// Komponen StatsCard (Tidak berubah)
+const StatsCard = () => (
+    <div className="relative p-4 border bg-black/50 pixel-border-box pixel-border-hover hover:scale-105 ">
+        <h3 className="mb-4 text-lg font-semibold text-center text-cyan-400 font-pixel-title">
+            AGENT STATUS
         </h3>
-        <ul className="space-y-2 text-lg text-gray-300 font-pixel-body">
-            {roles.map((role, index) => (
-                <li key={index} className="flex items-center gap-2">
-                    <span className="text-cyan-400 font-pixel-title text-sm">▶</span>
-                    {role}
-                </li>
-            ))}
+        <ul className="space-y-3">
+            <StatItem label="Level" value={20} valueColor="text-cyan-400" isAnimated />
+            <StatItem label="Class" value="Engineer" />
+            <StatItem label="Planet" value="Earth" />
+            <StatItem label="Focus" value="IoT & Web" />
+            <StatItem label="Status" value="Online" valueColor="text-green-400" />
         </ul>
     </div>
 )
 
-// --- KOMPONEN ITEM LOG (List Kiri) ---
+// ✅ --- KOMPONEN BARU UNTUK MENGISI RUANG KOSONG ---
+const ActiveObjectiveCard = () => (
+  <div className="relative p-4 mt-8 border bg-black/50 pixel-border-box pixel-border-hover">
+    <h3 className="mb-4 text-lg font-semibold text-center text-cyan-400 font-pixel-title">
+      ACTIVE OBJECTIVE
+    </h3>
+    {/* Ganti teks ini dengan apa yang sedang Anda pelajari! */}
+    <p className="text-lg text-center text-white/90 font-pixel-body md:text-xl">
+      Currently mastering web development with React and expanding IOT knowledge.
+    </p>
+  </div>
+)
+// ✅ --- AKHIR KOMPONEN BARU ---
+
+
+// Komponen Log Item (Tidak berubah)
 const ExperienceLogItem = ({ role, company, duration, description, isFirst }) => (
  <motion.div
   className={`relative p-4 ${isFirst ? 'border-t-0' : 'border-t'} border-cyan-400/30`}
@@ -29,10 +75,10 @@ const ExperienceLogItem = ({ role, company, duration, description, isFirst }) =>
   transition={{ duration: 0.6 }}
   viewport={{ once: true, amount: 0.3 }}
  >
-  <h4 className="text-xl font-bold text-cyan-400 font-pixel-title mb-1">{role}</h4>
-  <p className="mb-4 text-md text-gray-400 font-pixel-body">{company} | {duration}</p>
+  <h4 className="mb-1 text-xl font-bold text-cyan-400 font-pixel-title">{role}</h4>
+  <p className="mb-4 text-lg text-gray-400 text-md font-pixel-body md:text-xl">{company} | {duration}</p>
     
-  <ul className="list-none text-gray-300 font-pixel-body space-y-2 pl-4">
+  <ul className="pl-4 space-y-2 text-lg text-gray-300 list-none font-pixel-body md:text-xl">
    {description.map((item, index) => (
     <li key={index} className="flex items-start gap-2">
             <span className="text-cyan-400 font-pixel-title text-sm mt-0.5"></span>
@@ -43,46 +89,49 @@ const ExperienceLogItem = ({ role, company, duration, description, isFirst }) =>
  </motion.div>
 )
 
+
 // --- KOMPONEN UTAMA EXPERIENCE ---
 export default function Experience({ id }) {
+ // Data experiences (Tidak berubah)
  const experiences = [
   {
-   role: 'IoT System Developer (Intern)',
-   company: 'Future Tech Solutions',
-   duration: 'Jan 2024 - Jul 2024',
+   role: 'IoT & Automation Developer (Student Project)',
+   company: 'University of Brawijaya',
+   duration: '2024 - Now',
    description: [
-    'Developed a real-time monitoring dashboard using React and Firebase.',
-    'Optimized data transmission protocol on ESP32 microcontrollers, reducing power consumption by 20%.',
-    'Integrated environmental sensors into the existing IoT network for data collection.',
+    'Designed an IoT-based vehicle alignment system using ESP32, ADS1115, and MPU6050 sensors for toe and camber simulation.',
+    'Implemented real-time data monitoring and visualization using React and Firebase.',
+    'Focused on power-efficient sensor integration and wireless data acquisition.',
    ],
   },
   {
-   role: 'Web Developer Freelancer',
-   company: 'Client Projects',
-   duration: '2023 - Sekarang',
+   role: 'Web Developer',
+   company: 'Freelance & Personal Projects',
+   duration: '2023 - Now',
    description: [
-    'Built and deployed responsive landing pages using Laravel and Tailwind CSS.',
-    'Managed version control (Git) and deployment workflows for client websites.',
+    'Built and deployed responsive websites using React, Tailwind CSS, and Netlify Hosting.',
+   'Developed the website zxaviers.site and pcb-custom-malang.web.app for personal and client showcase.',
+   'Managed version control and CI/CD pipelines using GitHub and Vercel.'
    ],
   },
     {
       role: 'Computer Engineering Student',
       company: 'University of Malang',
-      duration: '2022 - Sekarang',
+      duration: '2024 - Now',
       description: [
-        'Focused on Embedded Systems, Data Structures, and AI/ML principles.',
-        'Active member of the Robotics Club and IoT Research Group.',
+        'Concentrating on Embedded Systems, AI/ML, and IoT Integration.',
+        'Active in faculty events as Staff Perkap (PKKMB FILKOM 2025) and Staff PR (Scholarship Festival 2025).',
+        'GPA: 3.73 at the end of Semester 2.',
       ],
     },
  ]
 
-  const roles = experiences.map(exp => exp.role);
 
  return (
-    // ✅ MODIFIED: Wrapper luar DIHAPUS. Padding disesuaikan.
   <motion.section
-   id={id}
-   className="relative px-0 py-12 scroll-mt-24" // Padding disesuaikan
+   id={id} 
+   // ✅ DIPERBARUI: Mengubah px-0 menjadi px-6
+   className="relative px-6 py-12 scroll-mt-24"
    initial={{ opacity: 0 }}
    whileInView={{ opacity: 1 }}
    transition={{ duration: 0.8 }}
@@ -91,12 +140,13 @@ export default function Experience({ id }) {
     <div className="relative z-10 p-4 mx-auto overflow-hidden text-white shadow-xl md:p-10 max-w-auto bg-white/10 pixel-border-box">
    <div className="relative z-10">
     <h2 className="mb-12 text-3xl font-bold text-center text-white md:text-4xl font-pixel-title">
-     My Experience
+     Mission Log 
     </h2>
     
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             
-            <div className="md:col-span-2 bg-black/50 border pixel-border-box ">
+            {/* KOLOM KIRI (LOG) */}
+            <div className="border md:col-span-2 bg-black/50 pixel-border-box ">
                 {experiences.map((exp, index) => (
                     <ExperienceLogItem 
                         key={index} 
@@ -106,8 +156,12 @@ export default function Experience({ id }) {
                 ))}
             </div>
 
+            {/* KOLOM KANAN (STATS & OBJECTIVE) */}
             <div className="md:col-span-1">
-                <StatsCard roles={roles} />
+                <StatsCard />
+                
+                {/* ✅ KARTU BARU DITAMBAHKAN DI SINI */}
+                <ActiveObjectiveCard />
             </div>
 
     </div>
