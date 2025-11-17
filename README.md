@@ -15,7 +15,7 @@
 
 ---
 
-## 🎮 Play a Game (tanpa upload apa pun)
+## 🎮 Play a Game 
 ### ✈️ Flappy Bird
 <iframe src="https://flappybird.io/" width="350" height="500"></iframe>
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 🐍 Snake Contributions (auto-generated, no GIF needed)
+## 🐍 Snake Contributions 
 ![Snake animation](https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg)
 
 ---
@@ -44,7 +44,7 @@
 
 ---
 
-## ✨ Fun Auto Widgets (tanpa resource)
+## ✨ Fun Auto Widgets 
 
 ### 💬 Random Developer Quote
 ![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
