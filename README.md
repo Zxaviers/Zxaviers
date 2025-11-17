@@ -16,11 +16,8 @@
 ---
 
 ## 🎮 Play a Game 
-### ✈️ Flappy Bird
-<iframe src="https://flappybird.io/" width="350" height="500"></iframe>
-
-### 🧩 2048
-<iframe src="https://play2048.co/" width="350" height="450"></iframe>
+### 👾 Space Invaders
+<iframe src="https://javascript-invaders.vercel.app/" width="500" height="600"></iframe>
 
 ---
 
