@@ -67,7 +67,8 @@
 ## 📫 Connect With Me
 
 - 🌐 Website: **https://zxaviers.site**  
-- ✉️ Email: **riskimardhani@gmail.com**  
+- ✉️ Email: **riskimardhani@gmail.com**
+- 🅾  Instagram **https://instagram.com/sza.vy1st**
 
 ---
 
