@@ -1,62 +1,78 @@
-<!-- Pixel Typing Banner -->
-<p align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Pixelify+Sans&size=22&duration=3000&pause=500&color=9AE6FF&center=true&vCenter=true&width=450&lines=Hi%2C+I'm+Zxaviers;Web+Developer;IoT+Engineer;Pixel+Art+Space+Enthusiast;Welcome+to+my+Universe!">
-  </a>
-</p>
+<!-- TITLE -->
+<h1 align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Pixelify+Sans&size=28&duration=3000&pause=800&color=80D4FF&center=true&vCenter=true&width=435&lines=Welcome+to+my+Universe;I'm+Zxaviers" />
+</h1>
 
 ---
 
-## 🌌 About Me
-- 🔭 Web Developer (React & Tailwind enjoyer)  
-- ⚙️ IoT Engineering & Embedded Systems  
-- 🌠 Pixel-art and space themed UI lover  
-- 💻 Always exploring coding style
+## 🌠 About Me
+
+- 🚀 Web Developer (React & Tailwind enjoyer)  
+- 🔧 IoT Engineering & Embedded Systems  
+- 🎨 Pixel-art & Space-themed UI lover  
+- 🧠 Passionate about problem solving & coding  
+- 🌌 Constantly building my own digital galaxy
 
 ---
 
-## 🎮 Play a Game 
-### 👾 Space Invaders
-<iframe src="https://javascript-invaders.vercel.app/" width="500" height="600"></iframe>
+## ✨ Highlights
 
----
-
-## 🐍 Snake Contributions 
-![Snake animation](https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg)
+- 🌐 Creator of **zxaviers.site**  
+- 💻 Experience with **ESP32**, **Arduino**, **MPU6050**, **ADS1115**, embedded sensors  
+- 🛠 Builds interactive web apps + IoT prototypes  
+- 🎮 Loves retro pixel art, shaders, and space-themed UI  
 
 ---
 
 ## 📊 GitHub Stats
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Zxaviers&show_icons=true&theme=tokyonight" height="160" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Zxaviers&layout=compact&theme=tokyonight" height="160" />
-</p>
+
+<div align="center">
+
+<img height="160" src="https://github-readme-stats.vercel.app/api?username=Zxaviers&show_icons=true&theme=tokyonight&hide_border=true&border_radius=12" />
+
+<img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Zxaviers&layout=compact&theme=tokyonight&hide_border=true&border_radius=12" />
+
+</div>
 
 ---
 
-## 🏆 GitHub Achievements
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=Zxaviers&theme=onedark&no-frame=true&margin-w=10" />
-</p>
+## 🐍 Snake Contributions (Animated)
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" />
+</div>
 
 ---
 
-## ✨ Fun Auto Widgets 
+## 🎖 Achievements & Badges
 
-### 💬 Random Developer Quote
+<div align="center">
+  
+![Metrics](https://github-profile-trophy.vercel.app/?username=Zxaviers&theme=onedark&no-frame=true&row=1&margin-w=15)
+
+</div>
+
+---
+
+## 💬 Random Dev Quote
+
+<div align="center">
+
 ![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
-### 😺 Random Cat for Vibes
-![Cat](https://cataas.com/cat/gif)
+</div>
 
 ---
 
 ## 📫 Connect With Me
-- 🌐 Website: https://zxaviers.site  
-- 📨 Email: riskimardhani@gmail.com  
+
+- 🌐 Website: **https://zxaviers.site**  
+- ✉️ Email: **riskimardhani@gmail.com**  
 
 ---
 
-<p align="center">
-  <sub>Made with ❤️ by Zxaviers — Powered by Pixel Art & Space Vibes</sub>
-</p>
+<br>
+
+<div align="center">
+  <sub>Crafted with ❤️ by Zxaviers — Powered by Pixel Art & Space Vibes 🚀</sub>
+</div>
