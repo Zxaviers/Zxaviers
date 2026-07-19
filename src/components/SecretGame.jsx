@@ -1,7 +1,6 @@
 // src/components/SecretGame.jsx
 
 import { useEffect, useRef, useState } from 'react' // ✅ Import useState
-import kaboom from 'kaboom'
 //eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
@@ -32,21 +31,35 @@ const useIsMobile = (breakpoint = 768) => {
 export default function SecretGame({ id }) {
   const canvasRef = useRef(null)
   const isMobile = useIsMobile(); // ✅ Gunakan hook
+  // ✅ Fallback UI jika Kaboom gagal dimuat/diinisialisasi (mis. WebGL tidak didukung)
+  const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
     // ✅ Jangan jalankan game di seluler
-    if (isMobile) return; 
+    if (isMobile) return;
 
     // Flag untuk mencegah double-initialization
     let k = null;
+    // ✅ Cegah inisialisasi jika komponen unmount sebelum import selesai
+    let cancelled = false;
 
-    if (canvasRef.current) {
+    // ✅ Muat library game (kaboom) hanya saat benar-benar dibutuhkan (desktop),
+    // supaya pengunjung mobile tidak ikut mengunduhnya.
+    import('kaboom').then(({ default: kaboom }) => {
+      if (cancelled || !canvasRef.current) return;
+
+      try {
+
       k = kaboom({
-        global: false, 
-        canvas: canvasRef.current, 
-        width: 800, 
-        height: 600, 
-        background: [0, 0, 0], 
+        global: false,
+        canvas: canvasRef.current,
+        width: 800,
+        height: 600,
+        background: [0, 0, 0],
+        // ✅ Kaboom secara default memanggil canvas.focus() saat init, yang
+        // membuat browser auto-scroll ke section ini walau berada di bawah
+        // halaman. Matikan supaya halaman tetap di Hero saat pertama load.
+        focus: false,
       })
 
       // ----- MULAI LOGIKA GAME -----
@@ -231,12 +244,20 @@ export default function SecretGame({ id }) {
 
       // Mulai game di scene "start"
       k.go("start");
-      
+
       // ----- AKHIR LOGIKA GAME -----
-    }
+      } catch (err) {
+        console.error('Secret Level failed to initialize:', err)
+        if (!cancelled) setHasError(true)
+      }
+    }).catch((err) => {
+      console.error('Failed to load the Secret Level game module:', err)
+      if (!cancelled) setHasError(true)
+    })
 
     // ✅ 2. CLEANUP DIPERBAIKI
     return () => {
+        cancelled = true;
         if (k && typeof k.destroy === 'function') {
             // k.destroy(); // Ini bisa menyebabkan error jika konteks sudah hilang
         }
@@ -269,22 +290,31 @@ export default function SecretGame({ id }) {
           Secret Level
         </motion.h2>
         
-        {/* ✅ Render Canvas atau Pesan Mobile */}
+        {/* ✅ Render Canvas, Pesan Mobile, atau Pesan Error */}
         {isMobile ? (
-          <div 
+          <div
             className="flex items-center justify-center p-4 text-center bg-black/50"
             // Atur ukuran agar konsisten dengan canvas, tapi responsif
-            style={{ width: '800px', height: '600px', maxWidth: '100%', minHeight: '300px' }} 
+            style={{ width: '800px', height: '600px', maxWidth: '100%', minHeight: '300px' }}
           >
             <p className="text-xl text-cyan-400 font-pixel-body md:text-2xl">
               This secret level can only be played on a desktop.
             </p>
           </div>
+        ) : hasError ? (
+          <div
+            className="flex items-center justify-center p-4 text-center bg-black/50"
+            style={{ width: '800px', height: '600px', maxWidth: '100%', minHeight: '300px' }}
+          >
+            <p className="text-xl text-cyan-400 font-pixel-body md:text-2xl">
+              This secret level couldn't load on your browser. Try a different one!
+            </p>
+          </div>
         ) : (
-          <canvas 
-            ref={canvasRef} 
+          <canvas
+            ref={canvasRef}
             className="max-w-full mx-auto border-4 border-cyan-600/50" // ✅ max-w-full
-            style={{ imageRendering: 'pixelated' }} 
+            style={{ imageRendering: 'pixelated' }}
           ></canvas>
         )}
 

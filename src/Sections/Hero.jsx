@@ -16,28 +16,28 @@ export default function Hero({ heroTypewriter, id, assets }) {
       
       {/* ... (Aset roket & planet tidak berubah) ... */}
       {assets.rocket && (
-        <div 
-          alt="Pixel Rocket" 
-          className="absolute z-2 pixel-asset animate-float-slow hero-rocket-asset" 
-          style={{ 
+        <div
+          aria-hidden="true"
+          className="absolute z-2 pixel-asset animate-float-slow hero-rocket-asset"
+          style={{
             backgroundImage: `url(${assets.rocket})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
-          }} 
+          }}
         />
       )}
       {assets.planet && (
-        <div 
-          className="absolute z-2 animate-float-slow hero-planet-asset" 
+        <div
+          aria-hidden="true"
+          className="absolute z-2 animate-float-slow hero-planet-asset"
         >
             <div
-                alt="Pixel Planet" 
-                className="w-full h-full pixel-asset" 
-                style={{ 
+                className="w-full h-full pixel-asset"
+                style={{
                     backgroundImage: `url(${assets.planet})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
-                }} 
+                }}
             />
         </div>
       )}

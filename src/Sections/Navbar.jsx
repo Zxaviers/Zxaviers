@@ -1,11 +1,15 @@
 // src/Sections/Navbar.jsx
 
 import React, { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Navbar = React.memo(({ logo }) => {
   const [active, setActive] = useState('home')
-  const [isOpen, setIsOpen] = useState(false) 
-  const menuItems = ['Home', 'Agents', 'Skill Tree', 'Mission Log', 'Artifacts', 'Contact']
+  const [isOpen, setIsOpen] = useState(false)
+  const menuItems = ['Home', 'Agents', 'Skill Tree', 'Mission Log', 'Artifacts']
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const smoothScrollTo = (targetY, duration = 1000) => {
     const startY = window.scrollY
     const distance = targetY - startY
@@ -37,6 +41,30 @@ const Navbar = React.memo(({ logo }) => {
     }
   }
 
+  // ✅ Section-section beranda cuma ada saat kita di route "/" — kalau lagi di
+  // halaman lain (case study, devlog), balik ke beranda dulu baru scroll.
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault()
+    setIsOpen(false)
+    if (location.pathname === '/') {
+      handleScroll(targetId)
+    } else {
+      navigate(`/#${targetId}`)
+    }
+  }
+
+  // ✅ Setelah pindah ke "/#id" dari halaman lain, tunggu section-nya ter-render
+  // baru scroll ke sana.
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const id = location.hash.replace('#', '')
+      const timer = setTimeout(() => handleScroll(id), 50)
+      return () => clearTimeout(timer)
+    }
+  }, [location])
+
+  // ✅ Observer di-setup ulang tiap ganti halaman, supaya selalu mengamati
+  // section milik halaman yang sedang aktif (bukan sisa dari halaman sebelumnya).
   useEffect(() => {
     const sections = document.querySelectorAll('section')
     const observer = new IntersectionObserver(
@@ -51,14 +79,16 @@ const Navbar = React.memo(({ logo }) => {
     )
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [])
+  }, [location.pathname])
+
+  const isDevlogActive = location.pathname.startsWith('/devlog')
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 border-b bg-black/90 border-white/10">
-      <div className="flex items-center gap-2">
+      <Link to="/" className="flex items-center gap-2">
         <img src={logo} alt="Logo" className="w-15 h-15" />
-        <h1 className="text-2xl font-extrabold font-pixel-title">Zxaviers</h1> 
-      </div>
+        <h1 className="text-2xl font-extrabold font-pixel-title">Zxaviers</h1>
+      </Link>
 
       {/* ✅ BERUBAH: dari lg:hidden menjadi xl:hidden */}
       <button
@@ -70,37 +100,33 @@ const Navbar = React.memo(({ logo }) => {
 
       <ul
         className={`
-        absolute z-40 w-full left-0 right-0 top-full 
-        bg-black/90 flex-col p-4 
+        absolute z-40 w-full left-0 right-0 top-full
+        bg-black/90 flex-col p-4
         transition-all duration-300 ease-in-out
         overflow-hidden
-        
+
         /* ✅ BERUBAH: Semua 'lg:' menjadi 'xl:' */
-        xl:flex xl:items-center xl:gap-6 xl:text-sm xl:font-medium 
+        xl:flex xl:items-center xl:gap-6 xl:text-sm xl:font-medium
         xl:static xl:w-auto xl:flex-row xl:bg-transparent xl:p-0
-        
+
         ${
           isOpen
             ? 'max-h-[300px] opacity-100'
             // ✅ BERUBAH: 'lg:' menjadi 'xl:'
             : 'max-h-0 opacity-0 xl:max-h-none xl:opacity-100 xl:static'
-        } 
+        }
       `}
       >
        {menuItems.map((item) => {
           const targetId = item.toLowerCase().replace(' ', '-')
-          
+
           return (
             <li key={item} className="relative py-2 group xl:py-0"> {/* ✅ 'lg:py-0' menjadi 'xl:py-0' */}
               <a
-                href={`#${targetId}`} 
-                onClick={(e) => {
-                  e.preventDefault() 
-                  handleScroll(targetId)
-                  setIsOpen(false)
-                }}
+                href={`/#${targetId}`}
+                onClick={(e) => handleNavClick(e, targetId)}
                 className={`px-3 py-2 transition-all duration-300 rounded-md ${
-                  active === targetId
+                  location.pathname === '/' && active === targetId
                     ? 'text-cyan-500 font-pixel-title'
                     : 'text-white/80 font-pixel-title'
                 } group-hover:text-white`}
@@ -112,6 +138,21 @@ const Navbar = React.memo(({ logo }) => {
             </li>
           )
         })}
+
+        <li className="relative py-2 group xl:py-0">
+          <Link
+            to="/devlog"
+            onClick={() => setIsOpen(false)}
+            className={`px-3 py-2 transition-all duration-300 rounded-md ${
+              isDevlogActive
+                ? 'text-cyan-500 font-pixel-title'
+                : 'text-white/80 font-pixel-title'
+            } group-hover:text-white`}
+          >
+            Devlog
+          </Link>
+          <span className="absolute inset-0 transition-all duration-300 rounded-lg pointer-events-none group-hover:bg-indigo-400/20"></span>
+        </li>
       </ul>
     </nav>
   )

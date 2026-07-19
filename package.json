@@ -7,26 +7,24 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,css}\""
   },
   "dependencies": {
-    "@pixi/particle-emitter": "^5.0.8",
-    "@pixi/react": "^8.0.3",
-    "@react-three/drei": "^10.7.6",
-    "@react-three/fiber": "^9.3.0",
-    "@types/three": "^0.180.0",
     "framer-motion": "^12.23.22",
     "kaboom": "^3000.1.17",
-    "pixi.js": "^8.14.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-icons": "^5.5.0",
-    "react-simple-typewriter": "^5.0.1",
-    "three": "^0.180.0"
+    "react-router-dom": "^7.18.1",
+    "react-simple-typewriter": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@tailwindcss/postcss": "^4.1.13",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",
@@ -34,10 +32,16 @@
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "gifsicle": "^7.0.1",
     "globals": "^16.4.0",
+    "jsdom": "^29.1.1",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "sharp": "^0.35.3",
+    "svgo": "^4.0.2",
     "tailwindcss": "^4.1.13",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vite-plugin-image-optimizer": "^2.0.3",
+    "vitest": "^4.1.10"
   }
 }

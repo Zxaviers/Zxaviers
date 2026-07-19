@@ -8,13 +8,20 @@ export default function StarsBackground() {
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
+    // ✅ Beberapa browser/webview tidak mendukung canvas 2D — jangan crash,
+    // cukup lewati animasi starfield.
+    if (!ctx) return
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
     let time = 0
+    let rafId = null
+
+    // ⭐ Lebih sedikit bintang di layar sempit (mobile) untuk mengurangi beban render
+    const starCount = canvas.width < 768 ? 50 : 100
 
     // ⭐ Stars (twinkling)
-    let stars = Array.from({ length: 100 }, () => ({
+    let stars = Array.from({ length: starCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 2,
@@ -75,7 +82,7 @@ export default function StarsBackground() {
         }
       })
 
-      requestAnimationFrame(animate)
+      rafId = requestAnimationFrame(animate)
     }
 
     animate()
@@ -86,7 +93,22 @@ export default function StarsBackground() {
     }
     window.addEventListener('resize', handleResize)
 
-    return () => window.removeEventListener('resize', handleResize)
+    // ⏸️ Hentikan loop saat tab tidak terlihat, lanjutkan saat aktif lagi
+    const handleVisibility = () => {
+      if (document.hidden) {
+        if (rafId) cancelAnimationFrame(rafId)
+        rafId = null
+      } else if (!rafId) {
+        animate()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.removeEventListener('visibilitychange', handleVisibility)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
   }, []) // Dependensi dikembalikan menjadi kosong
 
   return (

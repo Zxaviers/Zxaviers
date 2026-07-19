@@ -72,8 +72,8 @@ export default function About({ rocketGif }) {
         }}
       >
           <div
-              alt="Pixel Planet" 
-              className="pixel-asset" 
+              aria-hidden="true"
+              className="pixel-asset"
               style={{ 
                   backgroundImage: `url(${planetPixel})`,
                   backgroundSize: 'contain',
@@ -89,8 +89,8 @@ export default function About({ rocketGif }) {
       <div className="relative z-10 p-4 mx-auto overflow-hidden text-white shadow-xl md:p-10 max-w-7xl bg-white/10 pixel-border-box scroll-smooth">
         
         {/* ✅ ROCKET GIF */}
-        <div 
-          alt="Pixel Rocket" 
+        <div
+          aria-hidden="true"
           // ✅ Sembunyikan di seluler, tampilkan di desktop (md:block)
           className="absolute z-30 hidden pixel-asset md:block" 
           style={{ 

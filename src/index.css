@@ -36,6 +36,22 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
   cursor: pointer;
 }
 
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: #0F172A;
+  color: #22d3ee;
+  border: 2px solid #22d3ee;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+}
+
 
 
 /* --- PIXEL ART STYLES --- */
@@ -143,32 +159,6 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
 }
 .pixel-hover-cyan:hover::after {
   background-color: #0e7490;
-}
-
-
-
-.pixel-input {
-  background-color: #0F172A; 
-  border: 2px solid #475569; 
-  color: white;
-  /* ✅ REVISI FONT */
-  font-family: 'VT323', monospace; 
-  font-size: 1.125rem; /* ✅ Sesuaikan dengan font-pixel-body */
-  width: 100%;
-  transition: all 0.2s;
-  padding: 0.5rem; /* Tambahkan padding agar lebih baik */
-}
-@media (min-width: 768px) {
-  .pixel-input {
-    font-size: 1.25rem;
-  }
-}
-.pixel-input:focus {
-  outline: none;
-  border-color: #22d3ee; 
-}
-.pixel-input::placeholder {
-  color: #64748b; 
 }
 
 

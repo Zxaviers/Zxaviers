@@ -65,6 +65,43 @@ const ActiveObjectiveCard = () => (
 )
 // ✅ --- AKHIR KOMPONEN BARU ---
 
+// ✅ --- BADGE ACHIEVEMENT (perluasan AGENT STATUS) ---
+const achievements = [
+  { icon: '🎓', label: 'Honor Roll', detail: '3.73 GPA' },
+  { icon: '🛠️', label: 'Event Staff', detail: 'PKKMB FILKOM 2025' },
+  { icon: '🎗️', label: 'Event Staff', detail: 'Scholarship Fest 2025' },
+  { icon: '🚀', label: 'IoT Builder', detail: 'ESP32 Alignment System' },
+  { icon: '🌐', label: 'Web Shipper', detail: '2+ Live Projects' },
+  { icon: '🕹️', label: 'Secret Agent', detail: 'Found the Secret Level' },
+]
+
+const AchievementBadge = ({ icon, label, detail }) => (
+  <div
+    className="relative flex flex-col items-center gap-1 p-2 text-center border pixel-border-box pixel-hover-cyan"
+    style={{ '--pixel-border-color': '#475569', '--pixel-bg-color': '#0F172A' }}
+    title={detail}
+  >
+    <span className="text-2xl" aria-hidden="true">{icon}</span>
+    <span className="text-[10px] leading-tight text-cyan-400 font-pixel-title">
+      {label}
+    </span>
+  </div>
+)
+
+const AchievementsCard = () => (
+  <div className="relative p-4 mt-8 border bg-black/50 pixel-border-box pixel-border-hover">
+    <h3 className="mb-4 text-lg font-semibold text-center text-cyan-400 font-pixel-title">
+      ACHIEVEMENTS UNLOCKED
+    </h3>
+    <div className="grid grid-cols-3 gap-2">
+      {achievements.map((a) => (
+        <AchievementBadge key={a.label + a.detail} {...a} />
+      ))}
+    </div>
+  </div>
+)
+// ✅ --- AKHIR BADGE ACHIEVEMENT ---
+
 
 // Komponen Log Item (Tidak berubah)
 const ExperienceLogItem = ({ role, company, duration, description, isFirst }) => (
@@ -159,9 +196,10 @@ export default function Experience({ id }) {
             {/* KOLOM KANAN (STATS & OBJECTIVE) */}
             <div className="md:col-span-1">
                 <StatsCard />
-                
+
                 {/* ✅ KARTU BARU DITAMBAHKAN DI SINI */}
                 <ActiveObjectiveCard />
+                <AchievementsCard />
             </div>
 
     </div>
