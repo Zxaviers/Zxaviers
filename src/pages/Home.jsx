@@ -9,7 +9,7 @@ import Contact from '../Sections/Contact'
 //eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 import { Typewriter } from 'react-simple-typewriter'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { projects } from '../data/projects'
 
 // Aset Ikon Kontak
@@ -26,6 +26,10 @@ import planetMerah from '../assets/planetMerah.png'
 import rocketGif from '../assets/rocket_pixel.gif'
 
 export default function Home() {
+  useEffect(() => {
+    document.title = 'Zxaviers | Computer Engineering Student & Web Developer'
+  }, [])
+
   const heroTypewriter = useMemo(
     () => (
       <Typewriter
