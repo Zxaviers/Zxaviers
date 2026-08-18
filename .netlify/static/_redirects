@@ -1,2 +1,0 @@
-# Redirects handled natively by Next.js App Router.
-# Vite SPA redirect (/* /index.html 200) removed to prevent conflicts.
