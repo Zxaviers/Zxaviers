@@ -1,30 +1,32 @@
-<!-- TITLE -->
-<h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Pixelify+Sans&size=28&duration=3000&pause=800&color=80D4FF&center=true&vCenter=true&width=435&lines=Welcome+to+my+Universe;I'm+Zxaviers" />
-</h1>
+# Rizky Mardhani — @Zxaviers
 
----
+Computer Engineering undergraduate at FILKOM, Universitas Brawijaya.
+I build systems from sensor to browser: embedded and IoT on the hardware side, web applications on top.
 
-## 🌠 About Me
+## Flagship projects
 
-- 🚀 Web Developer (React & Tailwind enjoyer)  
-- 🔧 IoT Engineering & Embedded Systems  
-- 🎨 Pixel-art & Space-themed UI lover  
-- 🧠 Passionate about problem solving & coding  
-- 🌌 Constantly building my own digital galaxy
+| Project | What it is | Stack |
+|---|---|---|
+| [pocket-companion](https://github.com/Zxaviers/pocket-companion) | ESP32 creature-bot: OpenSCAD enclosure, OLED firmware, browser-based simulator | Arduino, ESP32, OpenSCAD, JavaScript |
+| [super-plumber](https://github.com/Zxaviers/super-plumber) | Mario-style platformer built with strict TDD (58 tests, incl. a bot that plays the levels end to end) | TypeScript, Vite, Vitest |
+| [reminder-widget](https://github.com/Zxaviers/reminder-widget) | Always-on-top desktop widget for Moodle/BRONE assignment deadlines via iCalendar feed | Tauri v2, TypeScript |
+| [balerejo-web](https://github.com/Zxaviers/balerejo-web) | Official website for Desa Balerejo, Blitar — village profile + UMKM catalog (community-service program, MMD FILKOM UB 2026) | Next.js, TypeScript, Tailwind CSS |
+| [zenspace](https://github.com/Zxaviers/zenspace) | Unified cloud-drive SaaS: multi-account Google Drive aggregation with smart upload routing *(private while in development)* | Next.js, Auth.js, Drizzle ORM, PostgreSQL |
 
----
+## Also on this profile
 
-## ✨ Highlights
+- [jkt48-vault](https://github.com/Zxaviers/jkt48-vault) — photo gallery CMS pattern on serverless Next.js (Google Drive storage + Google Sheets database)
+- [zenith](https://github.com/Zxaviers/zenith) — personal portfolio site (Next.js)
+- [bchecker](https://github.com/Zxaviers/bchecker) — Laravel + MySQL course project
+- [collabboard](https://github.com/Zxaviers/collabboard) — real-time collaborative whiteboard/kanban experiment
 
-- 🌐 Creator of **zxaviers.site**  
-- 💻 Experience with **ESP32**, **Arduino**, **MPU6050**, **ADS1115**, embedded sensors  
-- 🛠 Builds interactive web apps + IoT prototypes  
-- 🎮 Loves retro pixel art, shaders, and space-themed UI  
+## Hardware and embedded background
 
----
+ESP32 / Arduino firmware (MicroPython and C++), sensor integration (MAX30102 heart-rate, OLED displays SH1106/SH1107),
+MQTT telemetry, lightweight cryptography (ASCON), digital-logic design (Logisim), 3D-printed enclosures (OpenSCAD).
+Coursework: algorithms and data structures, operating systems, electronics, linear algebra.
 
-## 📊 GitHub Stats
+## Stats
 
 <div align="center">
 
@@ -33,48 +35,3 @@
 <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Zxaviers&layout=compact&theme=tokyonight&hide_border=true&border_radius=12" />
 
 </div>
-
----
-
-## 🐍 Snake Contributions (Animated)
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" />
-</div>
-
----
-
-## 🎖 Achievements & Badges
-
-<div align="center">
-  
-![Metrics](https://github-profile-trophy.vercel.app/?username=Zxaviers&theme=onedark&no-frame=true&row=1&margin-w=15)
-
-</div>
-
----
-
-## 💬 Random Dev Quote
-
-<div align="center">
-
-![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
-</div>
-
----
-
-## 📫 Connect With Me
-
-- 🌐 Website: **https://zxaviers.site**  
-- ✉️ Email: **riskimardhani@gmail.com**
-- 🅾  Instagram **https://instagram.com/sza.vy1st**
-
----
-
-<br>
-
-<div align="center">
-  <sub>Crafted with ❤️ by Zxaviers — Powered by Pixel Art & Space Vibes 🚀</sub>
-</div>
-
